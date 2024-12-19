@@ -12,7 +12,6 @@ from .views import index, CategoryViewSet, OperationViewSet
 
 router = routers.DefaultRouter()
 
-
 category_list = CategoryViewSet.as_view({
     'get': 'list',
     'post': 'create'
