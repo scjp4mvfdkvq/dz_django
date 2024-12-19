@@ -11,7 +11,7 @@ from rest_framework import status
 from .models import Operation, Category
 from .utils import convert_price_to_eur
 from .serializers import OperationSerializer, CategorySerializer
-
+from .serializers import MyTokenObtainPairSerializer
 
 
 
@@ -36,3 +36,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class OperationViewSet(viewsets.ModelViewSet):
     queryset = Operation.objects.all()
     serializer_class = OperationSerializer
+
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
