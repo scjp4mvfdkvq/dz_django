@@ -14,10 +14,22 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+class Category(models.Model):
+
+    name = models.CharField(max_length=64, verbose_name="Название категории")
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+    def __str__(self):
+        return f"{self.name}"
+
 class Operation(models.Model):
 
     name = models.TextField(
         verbose_name="Наименование операции",
+        db_index=True
     )
     description = models.TextField(
         blank=True,
@@ -96,3 +108,11 @@ class GoalManager(models.Manager):
 
     def budgets(self):
         return self.filter(goal_type=GoalType.SPENDING)
+
+class MyModelManager(models.Manager):
+    def my_custom_query(self):
+        return self.filter(some_field='some_value')
+
+class MyModel(models.Model):
+    some_field = models.CharField(max_length=100)
+    objects = MyModelManager()  # присваиваем наш менеджер объекту модели

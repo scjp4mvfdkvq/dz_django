@@ -1,6 +1,8 @@
 from datetime import datetime
 
+from django.db import transaction
 from django.shortcuts import render, get_object_or_404
+
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,6 +14,8 @@ from .serializers import OperationSerializer, CategorySerializer
 
 
 
+
+@transaction.atomic
 def index(request):
     # Главная страница
     all_operations = Operation.objects.all()
